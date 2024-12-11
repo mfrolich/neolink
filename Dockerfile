@@ -46,7 +46,7 @@ RUN  echo "TARGETPLATFORM: ${TARGETPLATFORM}"; \
   fi
 
 # Create the release container. Match the base OS used to build
-FROM debian:bookworm-slim
+FROM mfrolich/ha-ubuntu:2024.12.1
 ARG TARGETPLATFORM
 ARG REPO
 ARG VERSION
@@ -87,7 +87,8 @@ RUN gst-inspect-1.0; \
 
 ENV NEO_LINK_MODE="rtsp" NEO_LINK_PORT=8554
 
-CMD /usr/local/bin/neolink "${NEO_LINK_MODE}" --config /etc/neolink.toml
-ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE ${NEO_LINK_PORT}
+#CMD /usr/local/bin/neolink "${NEO_LINK_MODE}" --config /etc/neolink.toml
+#ENTRYPOINT ["/entrypoint.sh"]
+#EXPOSE ${NEO_LINK_PORT}
 
+CMD ["hass", "--config", "/config"]
