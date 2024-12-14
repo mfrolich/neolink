@@ -3,6 +3,7 @@
 #                    Andrew King,
 #                    Miroslav Šedivý
 # SPDX-License-Identifier: AGPL-3.0-only
+ARG HA_VERSION
 
 FROM docker.io/rust:slim-bookworm AS build
 ARG TARGETPLATFORM
@@ -46,7 +47,8 @@ RUN  echo "TARGETPLATFORM: ${TARGETPLATFORM}"; \
   fi
 
 # Create the release container. Match the base OS used to build
-FROM mfrolich/ha-ubuntu:2024.12.1
+
+FROM mfrolich/ha-ubuntu:${HA_VERSION}
 ARG TARGETPLATFORM
 ARG REPO
 ARG VERSION
